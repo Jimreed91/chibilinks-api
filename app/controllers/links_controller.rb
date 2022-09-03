@@ -6,17 +6,18 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link = Link.find(params[:id])
+    @link = Link.find_by(slug: params[:slug])
     @link.increment!( :count )
-    render json: @link
+    redirect_to @link.url
   end
 
   def create
     @link = Link.new(link_params)
+
     if @link.save
       render json: @link
     else
-      render error: { error: 'Something went wrong'}, status: 400
+      render error: { error: 'Something went wrong' }, status: 400
     end
   end
 
