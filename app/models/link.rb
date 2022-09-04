@@ -12,4 +12,8 @@ class Link < ApplicationRecord
   def to_param
     slug
   end
+
+  # def format_link
+  #   if self.link[0]
+  # end
 end

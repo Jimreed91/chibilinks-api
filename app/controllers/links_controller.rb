@@ -12,12 +12,20 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(link_params)
+    @link = Link.find_by(url: params[:url])
+    if @link
 
-    if @link.save
       render json: @link
     else
-      render error: { error: 'Something went wrong' }, status: 400
+
+      @link = Link.new(link_params)
+
+      if @link.save
+        render json: @link
+      else
+        render error: { error: 'Something went wrong' }, status: 400
+    end
+
     end
   end
 
