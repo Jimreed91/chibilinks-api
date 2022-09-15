@@ -24,9 +24,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  username: postgres
-  password: password
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
   pool: 5
 
 
@@ -91,6 +92,6 @@ test:
 #
 production:
   <<: *default
-  database: chibilinks_api_production
-  username: chibilinks_api
-  password: <%= ENV['CHIBILINKS_API_DATABASE_PASSWORD'] %>
+  # database: chibilinks_api_production
+  # username: chibilinks_api
+  # password: <%= ENV['CHIBILINKS_API_DATABASE_PASSWORD'] %>
