@@ -7,8 +7,12 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find_by(slug: params[:slug])
-    @link.increment!( :count )
-    redirect_to @link.url
+    if @link
+      @link.increment!( :count )
+      redirect_to @link.url
+    else
+      render error: { error: 'Couldnt find that link'}, status:400
+    end
   end
 
   def create
@@ -27,6 +31,14 @@ class LinksController < ApplicationController
     end
 
     end
+  end
+
+  def healthy
+    render status: 200
+    render json: {
+      error: "Healthy!",
+      status: 200
+    }, status: 200
   end
 
   private
