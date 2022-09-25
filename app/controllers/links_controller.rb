@@ -28,6 +28,9 @@ class LinksController < ApplicationController
 
     end
   end
+  def healthy
+   render json: { status: 200 }
+  end
 
   private
 
