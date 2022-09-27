@@ -3,7 +3,7 @@ class Link < ApplicationRecord
   validates :url, presence: true, uniqueness: true
   validates :slug, uniqueness: true
   before_validation :create_slug
-
+  before_save :sanitise_url
 
   def create_slug
     self.slug = SecureRandom.uuid[0...4] if slug.nil?
@@ -13,6 +13,9 @@ class Link < ApplicationRecord
     slug
   end
 
+  def sanitise_url
+    self.url.downcase
+  end
   # def format_link
   #   if self.link[0]
   # end
