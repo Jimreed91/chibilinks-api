@@ -1,6 +1,6 @@
 class Link < ApplicationRecord
   validates_format_of :url, with: URI::regexp(%w(http https))
-  validates :url, presence: true, uniqueness: { case_sensitive: false }
+  validates :url, presence: true, uniqueness: { case_sensitive: true }
   validates :slug, uniqueness: true
   before_validation :create_slug
   before_save :sanitise_url
